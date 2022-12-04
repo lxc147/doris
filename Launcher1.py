@@ -420,7 +420,7 @@ with open("localConfig.json", "r") as f:
 print(12)         
 while True:
     # sleep to maintain alive
-    time.sleep(5*1)
+    time.sleep(5*60)
     # SelfUpdateProcedure()
     ## check update   
     try:
@@ -438,6 +438,7 @@ while True:
             localconfig["ExordeApp"]["lastUpdate"] = _version
             with open("localConfig.json", "w") as f:
                 json.dump(localconfig, f)
+            print(localconfig["ExordeApp"])
         try:
             print("[UPDATE SYSTEM] Last Version: ", localconfig["ExordeApp"]["lastUpdate"], "New:", _version)
         except:
@@ -451,6 +452,6 @@ while True:
             localconfig["ExordeApp"]["lastUpdate"] = _version
             with open("localConfig.json", "w") as f:
                 json.dump(localconfig, f)
-            # exit(1)
+            exit(1)
     except Exception as e:
         print(e)
