@@ -102,6 +102,7 @@ class Widget():
             try:
                 time.sleep(1)
                 _version = config_reg_contract.functions.get("version").call()
+                print(_version)
                 time.sleep(1)
                 _lastInfo = config_reg_contract.functions.get("lastInfo").call()
                 print("Latest message from Exorde Labs: ",_lastInfo)
@@ -130,34 +131,34 @@ class Widget():
         nb_max_before_interrup = 4000
         last_trial_timestamp = int(round((datetime.now()).timestamp()))
         max_acceptable_nocheck_duration = 3600
-        while True:                
-            ## Check RemoteKill   
-            for i in range(nb_max_before_interrup):
-                try:
-                    _remote_kill = ""
-                    try:
-                        time.sleep(1)
-                        _remote_kill = str(config_reg_contract.functions.get("remote_kill").call())                        
-                        last_trial_timestamp = int(round((datetime.now()).timestamp()))
-                    except Exception as e:
-                        if detailed_validation_printing_enabled:
-                            print("Failed to read config :",e)
-                        nb_trials_reading_config += 1
-                        time.sleep(1)
+        # while True:                
+        #     ## Check RemoteKill   
+        #     for i in range(nb_max_before_interrup):
+        #         try:
+        #             _remote_kill = ""
+        #             try:
+        #                 time.sleep(1)
+        #                 _remote_kill = str(config_reg_contract.functions.get("remote_kill").call())                        
+        #                 last_trial_timestamp = int(round((datetime.now()).timestamp()))
+        #             except Exception as e:
+        #                 if detailed_validation_printing_enabled:
+        #                     print("Failed to read config :",e)
+        #                 nb_trials_reading_config += 1
+        #                 time.sleep(1)
                     
-                    if(_remote_kill == "kill"):
-                        print("Forced Interruption of your Exorde Module. Check Discord for any update")  
-                        # exit(1)
+        #             if(_remote_kill == "kill"):
+        #                 print("Forced Interruption of your Exorde Module. Check Discord for any update")  
+        #                 # exit(1)
 
-                    now_ts = int(round((datetime.now()).timestamp()))          
+        #             now_ts = int(round((datetime.now()).timestamp()))          
                     
-                    if last_trial_timestamp < ( now_ts - max_acceptable_nocheck_duration ): # wait 30 min max    
-                        print("[Remote Kill Status Check] Could not read ConfigRegistry ",nb_max_before_interrup," times in a row, in a period of 30min. The Network might be in trouble, please wait.")  
-                        # exit(1) 
-                except Exception as e:
-                    print("RemoteKill Error = ",e)
+        #             if last_trial_timestamp < ( now_ts - max_acceptable_nocheck_duration ): # wait 30 min max    
+        #                 print("[Remote Kill Status Check] Could not read ConfigRegistry ",nb_max_before_interrup," times in a row, in a period of 30min. The Network might be in trouble, please wait.")  
+        #                 # exit(1) 
+        #         except Exception as e:
+        #             print("RemoteKill Error = ",e)
 
-            time.sleep(1)
+        #     time.sleep(1)
             
 
     if validation_printing_enabled:
