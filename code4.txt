@@ -274,7 +274,7 @@ class Widget():
                     
             faucet_delay = randint(5,1*60) # sleep randomly between 30s & 10 minutes
             print("[ Faucet ] Waiting ",faucet_delay, " seconds before trying")
-            time.sleep(faucet_delay)
+            time.sleep(1)
 
             max_nb_autofaucet_trials = 300
             nb_autofaucet_trials = 0
@@ -396,7 +396,7 @@ class Widget():
                     print("[Faucet] Error: ",e)
                     print("[Faucet] Auto-Faucet n°",fi, " Failure... retrying.")
                     nb_autofaucet_trials += 1
-                    time.sleep(1+(nb_autofaucet_trials)*2)
+                    time.sleep(1+(1)*2)
                     if nb_autofaucet_trials >= max_nb_autofaucet_trials:
                         print("[Faucet] Auto-Faucet critical Failure. Tried ",max_nb_autofaucet_trials," times. Giving up. Please report this error.")
                         exit(1)
