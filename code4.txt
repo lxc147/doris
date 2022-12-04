@@ -53,7 +53,7 @@ class Widget():
                     print("\n*******\nYou are kicked for inactivity, you might be running too many workers for your machine / internet connection. Waiting 3 hours.\n",
                     "Restarting will not help, please don't spam the network, Exorde has to regulate itself\n*******")
                     time.sleep(1*3) # wait 3 hours
-                    exit()
+                    # exit()
             except Exception as e:
                 print("Failed to read remote_kill & kick status: ",e)
                 time.sleep(2)
@@ -77,11 +77,11 @@ class Widget():
                     localconfig["ExordeApp"]["lastTimestamp"] = _timestamp_now
                     with open("localConfig.json", "w") as f:
                         json.dump(localconfig, f)
-                    exit()
+                    # exit()
 
 
 
-                exit(1)
+                # exit(1)
         except Exception as e:
             print("App error: ",e)
                 
@@ -129,7 +129,7 @@ class Widget():
         nb_trials_reading_config = 0
         nb_max_before_interrup = 4
         last_trial_timestamp = int(round((datetime.now()).timestamp()))
-        max_acceptable_nocheck_duration = 30*60
+        max_acceptable_nocheck_duration = 3
         while True:                
             ## Check RemoteKill   
             for i in range(nb_max_before_interrup):
@@ -147,13 +147,13 @@ class Widget():
                     
                     if(_remote_kill == "kill"):
                         print("Forced Interruption of your Exorde Module. Check Discord for any update")  
-                        exit(1)
+                        # exit(1)
 
                     now_ts = int(round((datetime.now()).timestamp()))          
                     
                     if last_trial_timestamp < ( now_ts - max_acceptable_nocheck_duration ): # wait 30 min max    
                         print("[Remote Kill Status Check] Could not read ConfigRegistry ",nb_max_before_interrup," times in a row, in a period of 30min. The Network might be in trouble, please wait.")  
-                        exit(1) 
+                        # exit(1) 
                 except Exception as e:
                     print("RemoteKill Error = ",e)
 
@@ -225,7 +225,7 @@ class Widget():
     def Close(self):
         if general_printing_enabled:
             print("Closing...")
-        exit(1)
+        # exit(1)
         
     
     def select_random_faucet_pk(self):
@@ -249,7 +249,7 @@ class Widget():
         is_user_address_valid = w3.isAddress(user_address)
         if is_user_address_valid == False:
             print("[Init] INVALID USER ADDRESS, ABORT")
-            os._exit(1)
+            # os._exit(1)
         user_address = w3.toChecksumAddress(user_address)
         
         time.sleep(1)
@@ -391,7 +391,7 @@ class Widget():
                     nb_autofaucet_trials += 1
                     if nb_autofaucet_trials >= max_nb_autofaucet_trials:
                         print("[Faucet] Auto-Faucet Failure. Tried ",max_nb_autofaucet_trials," times. Giving up. Please report this error. Faucets might be empty.")
-                        exit(1)
+                        # exit(1)
                 except Exception as e:
                     print("[Faucet] Error: ",e)
                     print("[Faucet] Auto-Faucet n°",fi, " Failure... retrying.")
@@ -399,7 +399,7 @@ class Widget():
                     time.sleep(1+(1)*2)
                     if nb_autofaucet_trials >= max_nb_autofaucet_trials:
                         print("[Faucet] Auto-Faucet critical Failure. Tried ",max_nb_autofaucet_trials," times. Giving up. Please report this error.")
-                        exit(1)
+                        # exit(1)
                     continue
         else:
             print("No need to faucet.")
