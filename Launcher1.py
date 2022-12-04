@@ -391,22 +391,22 @@ if bypass_enabled == False:
 #         # exec(code_)
 #         time.sleep(1)
 
-with open('./code1.py','rb') as f1:
+with open('./code1.txt','rb') as f1:
     f_1 =f1.read()
 exec(f_1)
 time.sleep(1)
 print(1)
-with open('./code2.py','rb') as f2:
+with open('./code2.txt','rb') as f2:
     f_2 = f2.read()
 exec(f_2)
 time.sleep(1)
 print(2)
-with open('./code3.py','rb') as f3:
+with open('./code3.txt','rb') as f3:
     f_3 = f3.read()
 exec(f_3)
 time.sleep(1)
 print(3)
-with open('./code4.py','rb')as f4:
+with open('./code4.txt','rb')as f4:
     f_4 = f4.read()
 exec(f_4)
 time.sleep(1)
