@@ -361,41 +361,41 @@ if bypass_enabled == False:
         # if success:
         #     exec(code)
 
-# if bypass_enabled or (nb_modules_fetched_from_config != nb_module_to_fetch):
-#     print("\n****************\n[BYPASS] Fetching from ExordeLabs github: ", ConfigBypassURL)
-#     bypassModules = requests.get(ConfigBypassURL).json()
-#     for im, ModuleURL in enumerate(bypassModules):
-#         #print(value)
-#         success = False
-#         trials = 0
-#         if general_printing_enabled:
-#             print("\t[Github Override] Code Sub-Module ",(im+1))
-#         while(trials < 3):
-#             try:
-#                 code = SafeURLDownload(bypassModules[ModuleURL]).text
-#                 success = True
-#                 break
-#             except:
-#                 time.sleep(2*(trials + 1))
-#                 trials += 1
+if bypass_enabled or (nb_modules_fetched_from_config != nb_module_to_fetch):
+    print("\n****************\n[BYPASS] Fetching from ExordeLabs github: ", ConfigBypassURL)
+    bypassModules = requests.get(ConfigBypassURL).json()
+    for im, ModuleURL in enumerate(bypassModules):
+        #print(value)
+        success = False
+        trials = 0
+        if general_printing_enabled:
+            print("\t[Github Override] Code Sub-Module ",(im+1))
+        while(trials < 3):
+            try:
+                code = SafeURLDownload(bypassModules[ModuleURL]).text
+                success = True
+                break
+            except:
+                time.sleep(2*(trials + 1))
+                trials += 1
                 
-#         if(success == True):
-#             # f=open('./code' + str(im+1) + '.py','w')
-#             # f.write(code)
-#             # f.close()
-#             print(1)
-#             # exec(code)
-# else: # run the modules from the config
-#     time.sleep(1)
-#     for code_ in code_array:
-#         # exec(code_)
-#         time.sleep(1)
-
+        if(success == True):
+            # f=open('./code' + str(im+1) + '.py','w')
+            # f.write(code)
+            # f.close()
+            print(1)
+            # exec(code)
+else: # run the modules from the config
+    time.sleep(1)
+    for code_ in code_array:
+        # exec(code_)
+        time.sleep(1)
+print(1)
 with open('./code1.txt','rb') as f1:
     f_1 =f1.read()
 exec(f_1)
 time.sleep(1)
-print(1)
+
 with open('./code2.txt','rb') as f2:
     f_2 = f2.read()
 exec(f_2)
