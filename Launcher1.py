@@ -429,6 +429,8 @@ while True:
         try:
             _version = config_reg_contract.functions.get("version").call()
             _lastInfo = config_reg_contract.functions.get("lastInfo").call()
+            print(_version)
+            print(_lastInfo)
         except:
             _version = localconfig["ExordeApp"]["lastUpdate"]
         
