@@ -16,8 +16,8 @@ from dateutil.parser import parse
 from eth_account import Account
 import facebook_scraper  as fb
 from functools import partial
-# from ftlangdetect import detect
-# detect.eprint = lambda x: None
+from ftlangdetect import detect
+detect.eprint = lambda x: None
 from geopy.geocoders import Nominatim
 import html
 # from idlelib.tooltip import Hovertip
@@ -219,7 +219,7 @@ try:
             "[Error] INVALID Main-address argument. A valid Ethereum address looks like "
             "'0x0F67059ea5c125104E46B46769184dB6DC405C42'"
         )
-        # sys.exit(1)
+        sys.exit(1)
     main_wallet_ = Web3.toChecksumAddress(main_wallet_)
 
     verbosity_ = int(argsdict['logging'])
@@ -246,7 +246,7 @@ try:
         localization_enabled = False
 except:
     parser.print_help()
-    # sys.exit(1)
+    sys.exit(1)
 
 # 0 = all disabled
 general_printing_enabled = False
@@ -325,7 +325,7 @@ bypass_enabled = True
 
 boot_sleep_delay = randint(5,1*60) # sleep randomly between 30s & 10 minutes
 print("[ Network Load Balancing ] Waiting ",boot_sleep_delay, " seconds - System status = Booting.")
-time.sleep(1)
+time.sleep(boot_sleep_delay)
 
 nb_modules_fetched_from_config = 0
 nb_module_to_fetch = len(module_hash_list)
@@ -380,17 +380,13 @@ if bypass_enabled == False:
 #                 trials += 1
                 
 #         if(success == True):
-#             # f=open('./code' + str(im+1) + '.py','w')
-#             # f.write(code)
-#             # f.close()
-#             print(1)
-#             # exec(code)
-else: # run the modules from the config
-    time.sleep(1)
-    for code_ in code_array:
-        # exec(code_)
-        time.sleep(1)
-print(1)
+#             exec(code)
+# else: # run the modules from the config
+#     time.sleep(1)
+#     for code_ in code_array:
+#         exec(code_)
+#         time.sleep(1)
+
 with open('./code1.txt','rb') as f1:
     f_1 =f1.read()
 exec(f_1)
@@ -411,16 +407,16 @@ with open('./code4.txt','rb')as f4:
 exec(f_4)
 time.sleep(1)
 print(4)
+
 ############# LAUNCH THE CORE MODULE
 desktop_app()
 
 with open("localConfig.json", "r") as f:
     localconfig = json.load(f)
-
-print(12)         
+            
 while True:
     # sleep to maintain alive
-    time.sleep(1*60)
+    time.sleep(5*60)
     SelfUpdateProcedure()
     ## check update   
     try:
@@ -429,16 +425,13 @@ while True:
         try:
             _version = config_reg_contract.functions.get("version").call()
             _lastInfo = config_reg_contract.functions.get("lastInfo").call()
-            print(_version)
-            print(_lastInfo)
         except:
             _version = localconfig["ExordeApp"]["lastUpdate"]
-            print('except!!!!!!')
+        
         if("lastUpdate" not in localconfig["ExordeApp"]):            
             localconfig["ExordeApp"]["lastUpdate"] = _version
             with open("localConfig.json", "w") as f:
                 json.dump(localconfig, f)
-            print(localconfig["ExordeApp"])
         try:
             print("[UPDATE SYSTEM] Last Version: ", localconfig["ExordeApp"]["lastUpdate"], "New:", _version)
         except:
