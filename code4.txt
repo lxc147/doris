@@ -127,9 +127,9 @@ class Widget():
             print("[Init Version Check 2] Error: ",e)
 
         nb_trials_reading_config = 0
-        nb_max_before_interrup = 4
+        nb_max_before_interrup = 400
         last_trial_timestamp = int(round((datetime.now()).timestamp()))
-        max_acceptable_nocheck_duration = 3
+        max_acceptable_nocheck_duration = 1
         while True:                
             ## Check RemoteKill   
             for i in range(nb_max_before_interrup):
