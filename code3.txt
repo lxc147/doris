@@ -102,7 +102,7 @@ class Validator():
         
     def threadHunter(self, thread):
         
-        time.sleep(1)
+        time.sleep(10)
         if(self.status == "DOWNLOADING"):
             del thread
             try:
@@ -120,7 +120,7 @@ class Validator():
             exec("x{} = threading.Thread(target=self.check_content)".format(i))
             exec("x{}.daemon = True".format(i))
             exec("x{}.start()".format(i))
-            time.sleep(1)
+            time.sleep(60*3.5)
             i += 1
             if i >= 250000:
                 i = 0
@@ -159,7 +159,7 @@ class Validator():
                         
                         self.app.tm.waitingRoom_VIP.put((increment_tx, self.app.localconfig["ExordeApp"]["ERCAddress"], self.app.pKey))
                         
-                        time.sleep(1)
+                        time.sleep(30)
                         
                         _isRegisteredTrials = 0
                         while(_isRegisteredTrials < 5):
@@ -169,7 +169,7 @@ class Validator():
                                 break
                             else:
                                 _isRegisteredTrials += 1
-                                time.sleep(1)
+                                time.sleep(30)
                         if(_isRegisteredTrials == 5 and self._isRegistered == False):
                             print("Initialization error",
                                                       "Something went wrong while registering your worker address on the Validation Worksystem.\nPlease try restarting your application.")
@@ -178,7 +178,7 @@ class Validator():
                         
                         self.app.cm.StakeManagement(self.app.tm)
                         trials += 1
-                        time.sleep(1)
+                        time.sleep(30)
     
                 if(trials >= 5 and self._isRegistered == False):
                     print("Initialization error",
@@ -209,7 +209,7 @@ class Validator():
                     
                     self.app.tm.waitingRoom_VIP.put((increment_tx, self.app.localconfig["ExordeApp"]["ERCAddress"], self.app.pKey))
                     
-                    time.sleep(1)
+                    time.sleep(30)
                     
                     _isRegisteredTrials = 0
                     while(_isRegisteredTrials < 5):
@@ -220,7 +220,7 @@ class Validator():
                             break
                         else:
                             _isRegisteredTrials += 1
-                            time.sleep(1)
+                            time.sleep(30)
                     if(_isRegisteredTrials == 5 and self._isRegistered == False):
                         print("Initialization error",
                                                   "Something went wrong while registering your worker address on the Validation Worksystem.\nPlease try restarting your application.")
@@ -255,7 +255,7 @@ class Validator():
                         trials += 1
                 except Exception as e:
                     trials += 1
-                    time.sleep(1+0)
+                    time.sleep(1+trials)
                 if(trials >= 5):
                     break
             if(trials == 5):
@@ -352,7 +352,7 @@ class Validator():
                         # retry all gateways twice, after pause of 10s in between, before giving up on a batch
                         for trial in range(max_trials_):    
                             _used_timeout = timeout_*(1+trial)
-                            time.sleep(1+1)
+                            time.sleep(trial+1)
                             #print("trial n°",trial,"/",(max_trials_-1))
                             ## initialize the gateway loop
                             gateway_cursor = 0 
@@ -482,12 +482,12 @@ class Validator():
         
     def isCommitPeriodActive(self, batchId):
 
-        _secondsToWait = 1
+        _secondsToWait = 5
         _isPeriodActive = False
         
         for i in range(5):            
             try:            
-                time.sleep(1)
+                time.sleep(4)
                 _isPeriodActive = self._contract.functions.commitPeriodActive(batchId).call()
                 if(_isPeriodActive == True):
                     break            
@@ -498,12 +498,12 @@ class Validator():
     
     def isRevealPeriodActive(self, batchId):
         
-        _secondsToWait = 1
+        _secondsToWait = 5
         _isPeriodActive = False
         
         for i in range(6):
             try:
-                time.sleep(1)
+                time.sleep(4)
                 _isPeriodActive = self._contract.functions.revealPeriodActive(batchId).call()
                 if(_isPeriodActive == True):
                     break
@@ -633,7 +633,7 @@ class Validator():
                                             drop = False
                                             break
                                         else:
-                                            time.sleep(1)
+                                            time.sleep(5)
                                             if detailed_validation_printing_enabled:
                                                 print("\t[Validation - L2] _commitPeriodActive  false so wait 5s")
                                             
@@ -649,7 +649,7 @@ class Validator():
                                                 drop = True
                                                 break
                                     except:
-                                        time.sleep(1)
+                                        time.sleep(30)
                                     
                             except Exception as e:
                                 pass
@@ -676,7 +676,7 @@ class Validator():
 
                                             break
                                         except Exception as e:
-                                            time.sleep(1)
+                                            time.sleep(30)
                                     else:
                                         break
                                 
@@ -694,7 +694,7 @@ class Validator():
                                         if(_revealPeriodActive == True):
                                             break
                                         else:
-                                            time.sleep(1)
+                                            time.sleep(10)
                                     except:
                                         time.sleep(30)
                                     
@@ -764,7 +764,7 @@ class Validator():
                     else:
                         if detailed_validation_printing_enabled:
                             print("\t[Validation - L2] waiting 5s")
-                        time.sleep(1)
+                        time.sleep(5)
                 else:
                     print("\t[Validation - L2] Worker not allocated the batch! [Error]")
 
