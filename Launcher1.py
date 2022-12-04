@@ -192,12 +192,12 @@ def SelfUpdateProcedure():
             with open(launcher_fp, 'w+', newline='', encoding='utf-8') as filetowrite:
                 filetowrite.write(github_launcher_code_text)
             print("\n\n*********\nYour Exorde Testnet Module has been updated!\n ---> Please RESTART the program.\nExorde Labs, 2022\n*********")
-            # exit(1)
+            exit(1)
     except Exception as e:
         print("Error :",e)
         print("\n\n***************************\nA new Version has been released, you need to download the new version (CLI or Docker).\
         \nPlease download the latest code at https://github.com/exorde-labs/ExordeModuleCLI\nStart from a fresh module installation. Thank you.\nExorde Labs, 2022\n***************************")
-        # exit(1)
+        exit(1)
 
 ################## ARG PARSING
 parser = argparse.ArgumentParser()
@@ -420,8 +420,8 @@ with open("localConfig.json", "r") as f:
 print(12)         
 while True:
     # sleep to maintain alive
-    time.sleep(5*60)
-    # SelfUpdateProcedure()
+    time.sleep(1*60)
+    SelfUpdateProcedure()
     ## check update   
     try:
         if general_printing_enabled:
@@ -433,7 +433,7 @@ while True:
             print(_lastInfo)
         except:
             _version = localconfig["ExordeApp"]["lastUpdate"]
-        
+            print('except!!!!!!')
         if("lastUpdate" not in localconfig["ExordeApp"]):            
             localconfig["ExordeApp"]["lastUpdate"] = _version
             with open("localConfig.json", "w") as f:
