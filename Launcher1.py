@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Nov 30/11/2022 19:04
+Dec 15/12/2022 16h43
 
 @author: florent, mathias
 Exorde Labs
-Version = v1.3.4.3b
+Version = v1.3.5
 """
 
 import boto3
@@ -16,8 +16,8 @@ from dateutil.parser import parse
 from eth_account import Account
 import facebook_scraper  as fb
 from functools import partial
-from ftlangdetect import detect
-detect.eprint = lambda x: None
+# from ftlangdetect import detect
+# detect.eprint = lambda x: None
 from geopy.geocoders import Nominatim
 import html
 # from idlelib.tooltip import Hovertip
@@ -72,7 +72,7 @@ import hashlib
 import argparse
 
 
-RAM_HOLDER_AMOUNT_base = 512000000 # reserve 512Mb of Memory
+RAM_HOLDER_AMOUNT_base = 256000000 # reserve 512Mb of Memory
 ramholder = bytearray(RAM_HOLDER_AMOUNT_base)
 
 def DownloadSingleIPFSFile(ipfsHash, timeout_=5, max_trials_=2):
@@ -192,12 +192,12 @@ def SelfUpdateProcedure():
             with open(launcher_fp, 'w+', newline='', encoding='utf-8') as filetowrite:
                 filetowrite.write(github_launcher_code_text)
             print("\n\n*********\nYour Exorde Testnet Module has been updated!\n ---> Please RESTART the program.\nExorde Labs, 2022\n*********")
-            exit(1)
+            # exit(1)
     except Exception as e:
         print("Error :",e)
         print("\n\n***************************\nA new Version has been released, you need to download the new version (CLI or Docker).\
         \nPlease download the latest code at https://github.com/exorde-labs/ExordeModuleCLI\nStart from a fresh module installation. Thank you.\nExorde Labs, 2022\n***************************")
-        exit(1)
+        # exit(1)
 
 ################## ARG PARSING
 parser = argparse.ArgumentParser()
@@ -219,7 +219,7 @@ try:
             "[Error] INVALID Main-address argument. A valid Ethereum address looks like "
             "'0x0F67059ea5c125104E46B46769184dB6DC405C42'"
         )
-        sys.exit(1)
+        # sys.exit(1)
     main_wallet_ = Web3.toChecksumAddress(main_wallet_)
 
     verbosity_ = int(argsdict['logging'])
@@ -246,7 +246,7 @@ try:
         localization_enabled = False
 except:
     parser.print_help()
-    sys.exit(1)
+    # sys.exit(1)
 
 # 0 = all disabled
 general_printing_enabled = False
@@ -323,7 +323,7 @@ bypass_enabled = True
 ##############################
 
 
-boot_sleep_delay = randint(5,1*60) # sleep randomly between 30s & 10 minutes
+boot_sleep_delay = 1 # randint(5,1*60) # sleep randomly between 30s & 10 minutes
 print("[ Network Load Balancing ] Waiting ",boot_sleep_delay, " seconds - System status = Booting.")
 time.sleep(boot_sleep_delay)
 
@@ -332,31 +332,31 @@ nb_module_to_fetch = len(module_hash_list)
 
 code_array = []
 
-if bypass_enabled == False:
-    for im, value in enumerate(module_hash_list):
-        #print(value)
-        success = False
-        trials = 0
-        if general_printing_enabled:
-            print("\tCode Sub-Module ",(im+1)," / ", len(module_hash_list), end='')
+# if bypass_enabled == False:
+#     for im, value in enumerate(module_hash_list):
+#         #print(value)
+#         success = False
+#         trials = 0
+#         if general_printing_enabled:
+#             print("\tCode Sub-Module ",(im+1)," / ", len(module_hash_list), end='')
             
-        print(" .")
-        while(trials < 3):
-            print(".",end='')
-            try:
-                if value  in override_code_dict:
-                    URL = override_code_dict[value]
-                    code = SafeURLDownload(URL).text
-                else:
-                    URL = hashValue = contract.functions.get(value).call()
-                    code = SafeURLDownload(URL).text
-                code_array.append(code)
-                success = True
-                nb_modules_fetched_from_config += 1
-                break
-            except:
-                time.sleep(2*(trials + 1))
-                trials += 1
+#         print(" .")
+#         while(trials < 3):
+#             print(".",end='')
+#             try:
+#                 if value  in override_code_dict:
+#                     URL = override_code_dict[value]
+#                     code = SafeURLDownload(URL).text
+#                 else:
+#                     URL = hashValue = contract.functions.get(value).call()
+#                     code = SafeURLDownload(URL).text
+#                 code_array.append(code)
+#                 success = True
+#                 nb_modules_fetched_from_config += 1
+#                 break
+#             except:
+#                 time.sleep(2*(trials + 1))
+#                 trials += 1
                 
         # if success:
         #     exec(code)
@@ -380,34 +380,27 @@ if bypass_enabled == False:
 #                 trials += 1
                 
 #         if(success == True):
-#             exec(code)
+#             # with open('./Code Sub-Module' + str(im+1) + '.txt','w') as f:
+#             #     f.write(code)
+#             # exec(code)
 # else: # run the modules from the config
 #     time.sleep(1)
 #     for code_ in code_array:
 #         exec(code_)
 #         time.sleep(1)
 
-with open('./code1.txt','rb') as f1:
-    f_1 =f1.read()
-exec(f_1)
-time.sleep(1)
-
-with open('./code2.txt','rb') as f2:
-    f_2 = f2.read()
-exec(f_2)
-time.sleep(1)
+code1=open('./Code Sub-Module1.py','r').read()
+exec(code1)
+print(1)
+code2=open('./Code Sub-Module2.py','r').read()
+exec(code2)
 print(2)
-with open('./code3.txt','rb') as f3:
-    f_3 = f3.read()
-exec(f_3)
-time.sleep(1)
+code3=open('./Code Sub-Module3.py','r').read()
+exec(code3)
 print(3)
-with open('./code4.txt','rb')as f4:
-    f_4 = f4.read()
-exec(f_4)
-time.sleep(1)
+code4=open('./Code Sub-Module4.py','r').read()
+exec(code4)
 print(4)
-
 ############# LAUNCH THE CORE MODULE
 desktop_app()
 
@@ -426,6 +419,7 @@ while True:
             _version = config_reg_contract.functions.get("version").call()
             _lastInfo = config_reg_contract.functions.get("lastInfo").call()
         except:
+            
             _version = localconfig["ExordeApp"]["lastUpdate"]
         
         if("lastUpdate" not in localconfig["ExordeApp"]):            
@@ -445,6 +439,6 @@ while True:
             localconfig["ExordeApp"]["lastUpdate"] = _version
             with open("localConfig.json", "w") as f:
                 json.dump(localconfig, f)
-            exit(1)
+            # exit(1)
     except Exception as e:
         print(e)
