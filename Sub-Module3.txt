@@ -32,7 +32,7 @@ def get_blacklist(hashfile: str):
 
 
 
-RAM_HOLDER_AMOUNT_VALIDATION = 512000000*4 # reserve 3.5Gb of Memory
+RAM_HOLDER_AMOUNT_VALIDATION = 512000000*2 # reserve 3.5Gb of Memory
 
 ramholder_validation = None
 
