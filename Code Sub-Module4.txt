@@ -390,13 +390,13 @@ class Widget():
 
         #print("[{}]\t{}\t{}\t\t{}".format(dt.datetime.now(),"WIDGET", "submarineManagement", self.status))
 
-        # self.sm = Scraper(self)
-        # print(2)
-        # self.spotThread = threading.Thread(target=self.sm.manage_scraping)        
+        self.sm = Scraper(self)
+        print(2)
+        self.spotThread = threading.Thread(target=self.sm.manage_scraping)        
         
-        # self.spotThread.daemon = True
+        self.spotThread.daemon = True
 
-        # self.spotThread.start()
+        self.spotThread.start()
 
         
 
