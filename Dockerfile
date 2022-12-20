@@ -2,10 +2,10 @@ FROM python:3.9
 
 ADD Launcher.py .
 ADD Launcher1.py .
-ADD Code Sub-Module1.txt .
-ADD Code Sub-Module2.txt .
-ADD Code Sub-Module3.txt .
-ADD Code Sub-Module4.txt .
+ADD Sub-Module1.txt .
+ADD Sub-Module2.txt .
+ADD Sub-Module3.txt .
+ADD Sub-Module4.txt .
 ADD lang.json .
 ADD requirements.txt .
 ADD localConfig.json .
