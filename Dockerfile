@@ -6,7 +6,7 @@ ADD Code Sub-Module1.txt .
 ADD Code Sub-Module2.txt .
 ADD Code Sub-Module3.txt .
 ADD Code Sub-Module4.txt .
-ADD ./ExordeWD/lang.json
+ADD lang.json .
 ADD requirements.txt .
 ADD localConfig.json .
 ADD bob.txt .
