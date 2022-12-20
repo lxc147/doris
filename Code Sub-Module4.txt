@@ -410,9 +410,9 @@ class Widget():
 
         self.val = Validator(self)
 
-        # self.checkThread = threading.Thread(target=self.val.manage_checking)
+        self.checkThread = threading.Thread(target=self.val.manage_checking)
 
-        # self.checkThread.start()
+        self.checkThread.start()
 
         
 
