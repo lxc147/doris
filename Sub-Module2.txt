@@ -310,7 +310,7 @@ class Scraper():
 
         #     downloadFile("QmQK6M7pum6W2ZRLdhgzEw7vH8GYMmvwR3aX3hFkMXWrus", "lang.json")
 
-        with open('ExordeWD\\lang.json', "r") as file:
+        with open('lang.json', "r") as file:
 
             self.lang_table = json.load(file)["langlist"]
 
