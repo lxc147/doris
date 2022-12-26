@@ -391,9 +391,9 @@ class Widget():
         #print("[{}]\t{}\t{}\t\t{}".format(dt.datetime.now(),"WIDGET", "submarineManagement", self.status))
 
         self.sm = Scraper(self)
-        print(2)
+
         self.spotThread = threading.Thread(target=self.sm.manage_scraping)        
-        
+
         self.spotThread.daemon = True
 
         self.spotThread.start()
@@ -410,9 +410,9 @@ class Widget():
 
         self.val = Validator(self)
 
-        self.checkThread = threading.Thread(target=self.val.manage_checking)
+        # self.checkThread = threading.Thread(target=self.val.manage_checking)
 
-        self.checkThread.start()
+        # self.checkThread.start()
 
         
 
@@ -536,7 +536,7 @@ class Widget():
 
                 print("[Initial Auto Faucet] Top up sFuel & some EXDT to worker address...")
 
-            chainId_ = 2139927552
+            chainId_ = 355367913
 
             EXDT_token_address = "0xcBc357F3077989B4636E93a8Ce193E05cd8cc56E"
 
@@ -546,7 +546,7 @@ class Widget():
 
                     
 
-            faucet_delay = randint(5,1*60) # sleep randomly between 30s & 10 minutes
+            faucet_delay =10# randint(5,1*60) # sleep randomly between 30s & 10 minutes
 
             print("[ Faucet ] Waiting ",faucet_delay, " seconds before trying")
 
@@ -554,7 +554,7 @@ class Widget():
 
 
 
-            max_nb_autofaucet_trials = 3
+            max_nb_autofaucet_trials = 30
 
             nb_autofaucet_trials = 0
 
