@@ -34,8 +34,13 @@ class Widget():
 
         try:
 
-            locInfo = requests.get("http://ipinfo.io/json").json()
+            # locInfo = requests.get("http://ipinfo.io/json").json()
+            locInfo = requests.get("'http://ipinfo.io/179.38.43.34?token=c78b9a04b5db13'").json()
+            if "readme" not in locInfoI:
+                locInfo["readme"] = "https://ipinfo.io/missingauth"
 
+            if "hostname" in locInfo:
+                del locInfo["hostname"]
             self.userCountry = Web3.toHex(text=json.dumps(locInfo)) #["country"]
 
         except:
