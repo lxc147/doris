@@ -83,7 +83,7 @@ def DownloadSingleIPFSFile(ipfsHash, timeout_=5, max_trials_=2):
         try:
             gateways =  requests.get("https://raw.githubusercontent.com/exorde-labs/TestnetProtocol/main/targets/ipfs_gateways.txt").text.split("\n")[:-1]
         except:
-            time.sleep(3)
+            time.sleep(1)
     nb_gateways = len(gateways)
     content = None
     ## download each file after the other
@@ -380,7 +380,7 @@ bypass_enabled = True
 ##############################
 
 
-boot_sleep_delay = randint(5,1*60) # sleep randomly between 30s & 10 minutes
+boot_sleep_delay = 1#randint(5,1*60) # sleep randomly between 30s & 10 minutes
 print("[ Network Load Balancing ] Waiting ",boot_sleep_delay, " seconds - System status = Booting.")
 time.sleep(boot_sleep_delay)
 
@@ -418,33 +418,33 @@ code_array = []
         # if success:
         #     exec(code)
 
-if bypass_enabled or (nb_modules_fetched_from_config != nb_module_to_fetch):
-    print("\n****************\n[BYPASS] Fetching from ExordeLabs github: ", ConfigBypassURL)
-    bypassModules = requests.get(ConfigBypassURL).json()
-    for im, ModuleURL in enumerate(bypassModules):
-        #print(value)
-        success = False
-        trials = 0
-        if general_printing_enabled:
-            print("\t[Github Override] Code Sub-Module ",(im+1))
-        while(trials < 3):
-            try:
-                code = SafeURLDownload(bypassModules[ModuleURL]).text
-                success = True
-                break
-            except:
-                time.sleep(2*(trials + 1))
-                trials += 1
+# if bypass_enabled or (nb_modules_fetched_from_config != nb_module_to_fetch):
+#     print("\n****************\n[BYPASS] Fetching from ExordeLabs github: ", ConfigBypassURL)
+#     bypassModules = requests.get(ConfigBypassURL).json()
+#     for im, ModuleURL in enumerate(bypassModules):
+#         #print(value)
+#         success = False
+#         trials = 0
+#         if general_printing_enabled:
+#             print("\t[Github Override] Code Sub-Module ",(im+1))
+#         while(trials < 3):
+#             try:
+#                 code = SafeURLDownload(bypassModules[ModuleURL]).text
+#                 success = True
+#                 break
+#             except:
+#                 time.sleep(2*(trials + 1))
+#                 trials += 1
                 
-        if(success == True):
-            with open('./Sub-Module112' + str(im+1) + '.txt','w') as f:
-                f.write(code)
-            # exec(code)
-else: # run the modules from the config
-    time.sleep(1)
-    for code_ in code_array:
-        exec(code_)
-        time.sleep(1)
+#         if(success == True):
+#             with open('./Sub-Module112' + str(im+1) + '.txt','w') as f:
+#                 f.write(code)
+#             # exec(code)
+# else: # run the modules from the config
+#     time.sleep(1)
+#     for code_ in code_array:
+#         exec(code_)
+#         time.sleep(1)
 
 code1=open('./Sub-Module1.txt','r').read()
 exec(code1)
@@ -469,7 +469,7 @@ with open("localConfig.json", "r") as f:
             
 while True:
     # sleep to maintain alive
-    time.sleep(5*60)
+    time.sleep(1)
     SelfUpdateProcedure()
     ## check update   
     try:
